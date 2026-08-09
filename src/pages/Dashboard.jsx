@@ -10,31 +10,44 @@ import {
 
 function Dashboard() {
 
-  const isFirstDay = false;
-  const missedYesterday = false;
+ 
+  const studentState = "normal";
+
+  const isFirstDay = studentState === "first";
+  const missedYesterday = studentState === "missed";
+  const isEmptyProfile = studentState === "empty";
+
   return (
     <main className="min-h-screen bg-[#09090B] pb-24 text-white">
 
-      {/* Header */}
+     
       <header className="px-5 pb-6 pt-6">
 
         <p className="text-sm text-zinc-500">
-  Day 12 of your challenge
+ {isFirstDay ? "Day 1 of your challenge" : "Day 12 of your challenge"}
 </p>
         <div className="mt-2 flex items-center justify-between">
 
           <div>
-            <h1 className="text-2xl font-bold">
-              Good evening, Saksham 👋
-            </h1>
+          <h1 className="text-2xl font-bold">
+  {isEmptyProfile
+    ? "Welcome to ABTalks 👋"
+    : isFirstDay
+      ? "Welcome to ABTalks 👋"
+      : "Good evening, Saksham 👋"}
+</h1>
 
-            <p className="mt-1 text-sm text-zinc-500">
-              Keep showing up. You're doing great.
-            </p>
+<p className="mt-1 text-sm text-zinc-500">
+  {isEmptyProfile
+    ? "Complete your profile to personalize your challenge."
+    : isFirstDay
+      ? "Your 60-day journey starts today."
+      : "Keep showing up. You're doing great."}
+</p>
           </div>
 
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-600 font-semibold">
-            S
+          {isEmptyProfile ? "?" : "S"}
           </div>
 
         </div>
@@ -42,7 +55,7 @@ function Dashboard() {
       </header>
 
 
-      {/* Streak card */}
+      
       <section className="px-5">
 
         <div className="rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-600/20 to-purple-500/5 p-5">
@@ -64,7 +77,7 @@ function Dashboard() {
                 </p>
 
                 <p className="text-2xl font-bold">
-                  12 days
+               {isFirstDay || isEmptyProfile ? "0 days" : "12 days"}
                 </p>
               </div>
 
@@ -76,26 +89,29 @@ function Dashboard() {
 
           </div>
 
-          {/* First day encouragement */}
-<section className="px-5 pt-4">
+          
+{/* First day encouragement */}
+{isFirstDay && (
+  <section className="px-5 pt-4">
 
-  <div className="rounded-2xl border border-purple-500/20 bg-purple-500/5 p-4">
+    <div className="rounded-2xl border border-purple-500/20 bg-purple-500/5 p-4">
 
-    <p className="text-xs font-medium uppercase tracking-[0.15em] text-purple-400">
-      Starting today
-    </p>
+      <p className="text-xs font-medium uppercase tracking-[0.15em] text-purple-400">
+        Starting today
+      </p>
 
-    <p className="mt-2 text-sm leading-6 text-zinc-300">
-      Everyone starts at Day 1. Complete today's challenge
-      to light your first streak.
-    </p>
+      <p className="mt-2 text-sm leading-6 text-zinc-300">
+        Everyone starts at Day 1. Complete today's challenge
+        to light your first streak.
+      </p>
 
-  </div>
+    </div>
 
-</section>
+  </section>
+)}
 
 
-          {/* Progress */}
+          
           <div className="mt-6 flex items-center justify-between text-xs">
 
             <span className="text-zinc-400">
@@ -103,19 +119,25 @@ function Dashboard() {
             </span>
 
             <span className="font-medium text-white">
-              12 / 60 days
+            {isFirstDay || isEmptyProfile ? "0 / 60 days" : "12 / 60 days"}
             </span>
 
           </div>
 
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
 
-            <div className="h-full w-[20%] rounded-full bg-purple-500" />
+          <div
+  className={`h-full rounded-full bg-purple-500 ${
+  isFirstDay || isEmptyProfile ? "w-0" : "w-[20%]"
+  }`}
+/>
 
           </div>
 
           <p className="mt-3 text-xs text-zinc-500">
-            48 days left. Keep the streak alive.
+         {isFirstDay
+  ? "60 days ahead. Your journey starts today."
+  : "48 days left. Keep the streak alive."}  
           </p>
 
         </div>
@@ -123,7 +145,7 @@ function Dashboard() {
       </section>
 
 
-      {/* Today's challenge */}
+      
       <section className="px-5 pt-8">
 
         <div className="flex items-center justify-between">
@@ -183,8 +205,10 @@ function Dashboard() {
 
       </section>
 
-      {/* Streak recovery */}
-<section className="px-5 pt-8">
+      
+{/* Streak recovery */}
+{missedYesterday && (
+  <section className="px-5 pt-8">
 
   <div className="rounded-2xl border border-orange-500/20 bg-orange-500/5 p-5">
 
@@ -214,8 +238,29 @@ function Dashboard() {
 
   </div>
 
-</section>
+  </section>
+)}
 
+{isEmptyProfile && (
+  <section className="px-5 pt-6">
+    <div className="rounded-2xl border border-purple-500/20 bg-purple-500/5 p-5">
+      
+      <p className="text-xs font-medium uppercase tracking-[0.15em] text-purple-400">
+        Complete your profile
+      </p>
+
+      <p className="mt-2 text-sm leading-6 text-zinc-300">
+        Your challenge is ready. Add your profile details to
+        personalize your ABTalks experience.
+      </p>
+
+      <button className="mt-4 rounded-xl bg-purple-600 px-4 py-3 text-sm font-semibold text-white">
+        Complete profile →
+      </button>
+
+    </div>
+  </section>
+)}
 
       {/* Progress stats */}
       <section className="px-5 pt-8">
@@ -243,7 +288,7 @@ function Dashboard() {
             />
 
             <p className="mt-4 text-xl font-bold">
-              12
+            {isFirstDay || isEmptyProfile ? "0" : "12"}
             </p>
 
             <p className="mt-1 text-xs text-zinc-500">
@@ -261,7 +306,7 @@ function Dashboard() {
             />
 
             <p className="mt-4 text-xl font-bold">
-              8
+            {isFirstDay || isEmptyProfile ? "0" : "8"}
             </p>
 
             <p className="mt-1 text-xs text-zinc-500">
@@ -279,7 +324,7 @@ function Dashboard() {
             />
 
             <p className="mt-4 text-xl font-bold">
-              3
+            {isFirstDay || isEmptyProfile ? "0" : "3"} 
             </p>
 
             <p className="mt-1 text-xs text-zinc-500">
