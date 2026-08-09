@@ -143,3 +143,26 @@ https://abtalks-redesign-rho.vercel.app/
 The project is maintained in GitHub and collaborators can contribute through the repository.
 
 Changes are tested locally and production builds are verified before deployment.
+## Actual Prompt History
+
+The following are representative prompts used during the development of ABTalks:
+
+1. "Build a responsive student-focused landing page for a 60-day coding challenge."
+
+2. "Create a mobile-first dashboard showing streak, challenge progress, today's challenge, projects and badges."
+
+3. "Create a Challenge Day page with GitHub commit, LinkedIn post and live deployment proof fields."
+
+4. "Add proof health that tracks whether all three proof links have been provided."
+
+5. "Make the submission button work only when GitHub, LinkedIn and live deployment URLs are provided."
+
+6. "Help debug the React error caused by the lucide-react GitHub icon."
+
+7. "Make the landing page See How It Works button scroll to the How It Works section."
+
+8. "Help deploy the Vite React project to GitHub and Vercel."
+
+9. "Review the project for missing requirements and edge cases."
+
+10. "Create documentation for the AI-assisted development workflow."
